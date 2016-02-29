@@ -4,53 +4,37 @@ import dao.User;
 import dao.UserDao;
 import dao.UserRepository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
-    private static UserService USERSERVICE;
-    private static java.sql.Connection connection = UserDao.Connector();
-    private UserRepository userRepository;
-    private UserDao userDao = new UserDao();
+    private UserDao userDao;
 
-    public static UserService getUserService() {
-        if (USERSERVICE == null) {
-            USERSERVICE = new UserService();
-        }
-        return USERSERVICE;
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public void initialize() {
+        UserRepository userRepository = UserRepository.getUserRepository();
+        userRepository.clear();
+        userRepository.setList(userDao.getAll());
     }
 
     public List<User> getAll() {
-        Connection();
-        List<User> list = userDao.getUserList();
-        userRepository = UserRepository.getUserRepository();
-        userRepository.setList(list);
-        return list;
+        return UserRepository.getUserRepository().getAllUsers();
     }
 
-    public void save(int id, String name, int age, String dateOfBirth) {
-        Connection();
-        userDao.addUser(id, name, age, dateOfBirth);
+    public void addToRepository(User user) {
+        UserRepository.getUserRepository().addNewUsers(user);
     }
-
-    public void saveToFile() {
-        Connection();
-        userDao.saveToFile();
+    public void save() {
+        userDao.saveToDB();
     }
-
-    public void delete(String id) {
-        Connection();
-        userDao.delete(id);
-    }
-    public void Connection() {
-        try {
-            if (connection.isClosed()) {
-                connection = UserDao.Connector();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public void deleteUser(String id) {
+        if (UserRepository.getUserRepository().contains(id)) {
+            userDao.deleteFromNewList(id);
+        } else {
+            userDao.deleteFromDB(id);
+            initialize();
         }
     }
 }
-
-

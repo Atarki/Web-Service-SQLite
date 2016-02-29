@@ -1,5 +1,6 @@
 package main;
 
+import dao.DataSource;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -11,6 +12,8 @@ import handler.ErrorServlet;
 import handler.AddUserServlet;
 import handler.SaveToFileServlet;
 import handler.UserListServlet;
+import dao.UserDao;
+import service.UserService;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -20,11 +23,23 @@ public class Main {
         DeleteServlet deleteServlet = new DeleteServlet();
         UserListServlet userListServlet = new UserListServlet();
 
+        UserService userService = new UserService();
+        DataSource dataSource = new DataSource();
+        UserDao userDao = UserDao.getUserDao();
+
+        userListServlet.setUserService(userService);
+        addUserServlet.setUserService(userService);
+        deleteServlet.setUserService(userService);
+
+        userService.setUserDao(userDao);
+        userDao.setDataSource(dataSource);
+        userService.initialize();
+
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(addUserServlet), "/main");
         context.addServlet(new ServletHolder(errorServlet), "/error");
-        context.addServlet(new ServletHolder(saveToFileServlet), "/save");
-        context.addServlet(new ServletHolder(deleteServlet), "/delete");
+        context.addServlet(new ServletHolder(saveToFileServlet), "/addToRepository");
+        context.addServlet(new ServletHolder(deleteServlet), "/deleteFromDB");
         context.addServlet(new ServletHolder(userListServlet), "/users");
 
         ResourceHandler resourceHandler = new ResourceHandler();

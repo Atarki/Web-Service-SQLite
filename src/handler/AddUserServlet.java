@@ -1,5 +1,6 @@
 package handler;
 
+import dao.User;
 import main.PageGenerator;
 import service.UserService;
 
@@ -26,13 +27,14 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            int id = Integer.parseInt(req.getParameter("id"));
-            String name = req.getParameter("name");
-            int age = Integer.parseInt(req.getParameter("age"));
-            String dateOfBirth = req.getParameter("dateOfBirth");
+            User user = new User();
+            user.setId(Integer.parseInt(req.getParameter("id")));
+            user.setName(req.getParameter("name"));
+            user.setAge(Integer.parseInt(req.getParameter("age")));
+            user.setDateOfBirth(req.getParameter("dateOfBirth"));
 
-            userService = UserService.getUserService();
-            userService.save(id, name, age, dateOfBirth);
+            userService.addToRepository(user);
+//            userDao = UserDao.getUserDao();
 
             resp.sendRedirect("/users");
 
@@ -43,7 +45,9 @@ public class AddUserServlet extends HttpServlet {
             RequestDispatcher rd = req.getRequestDispatcher("/error");
             rd.include(req, resp);
         }
+    }
 
-
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

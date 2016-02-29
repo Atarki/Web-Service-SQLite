@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <link media="all" rel="stylesheet" type="text/css" href="css/web-db-style.css">
     <script type="text/javascript" src="js/main.js"></script>
@@ -18,9 +19,16 @@
     <button class="buttons">
         Add new user.
     </button>
-</form>
 
-${info}
+    <form action="/users"> method="post"
+        <form>
+            <button class="buttons">
+                Update Data Base.
+            </button>
+        </form>
+    </form>
+
+    ${info}
 
 </body>
 </html>
