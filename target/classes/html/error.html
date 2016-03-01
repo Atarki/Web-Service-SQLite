@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <link media="all" rel="stylesheet" type="text/css" href="css/web-db-style.css">
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+<div class="main">
+
+    <form method="get" action="/main">
+        <button class="buttons">
+            Refresh
+        </button>
+        <br>
+        <br>
+    </form>
+
+    ${info}
+
+    <form action="/main" method="post">
+
+        <input placeholder="ID" type="number" name="id" checked>
+        <input placeholder="Name" type="text" name="name" checked>
+        <input placeholder="Age" type="number" name="age" checked>
+        <input placeholder="Date Of Birthday" type="date" name="dateOfBirth" checked>
+
+        <button class="buttons">
+            Add new user.
+        </button>
+    </form>
+
+    <form action="/save">
+        <button formmethod="post" class="buttons">
+            Save to file txt.
+        </button>
+    </form>
+
+
+    <table class="userTable">
+        <#list users as user>
+            <tr id=${user.id}>
+                <td>#${user_index+1}</td>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.age}</td>
+                <td>${user.dateOfBirth}</td>
+                <td>
+                    <button class="deleteUser">Delete</button>
+                    <script>
+                        $('#${user.id}').click(function () {
+                            var trID = $('#${user.id}').valueOf();
+                            $.ajax({
+                                type: 'DELETE',
+                                url: '/delete',
+                                headers: {'id': '${user.id}'},
+                                success: function () {
+                                    $(trID).remove();
+                                }
+                            });
+                        });
+                    </script>
+                </td>
+            </tr>
+        </#list>
+    </table>
+</div>
+
+</body>
+</html>

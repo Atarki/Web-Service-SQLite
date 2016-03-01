@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+.main {
+    width: 800px;
+    padding: 15px;
+    margin: auto;
+}
+
+body {
+    background-color: lightcyan;
+    /*margin: 50px;*/
+    /*margin: 5% 0 0 25%;*/
+    margin: 5% 0 0 0;
+    font-family: monospace;
+}
+ input{
+     margin: 5px;
+ }
+.table {
+    width: 30%;
+    height: 30px;
+    border-color: #033f53;
+    empty-cells: show;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.buttons {
+
+    background-color:cadetblue;
+    border: 1px solid green;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    margin: 0 10px 0 10px;
+}
+
+button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.gray-background {
+    background-color: #c4daec;
+}
+
+table, th, td {
+    border: 1px black;
+    height: 15px;
+    width: auto;
+    text-align: center;
+
+}
+
+th, td {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #ededed
+}
+
+tr:hover {
+    background-color: #c4daec
+}
+
+div {
+    /*width: 250px;*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: inherit;
+    height: auto;
+    background-color:  aliceblue;
+}
