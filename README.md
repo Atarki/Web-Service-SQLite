@@ -1,5 +1,5 @@
 # Web-Service-SQLite
-Web service + servlets + SQLite
+Web main.java.com.study.userStore.service + servlets + SQLite
 
 
 

@@ -3,9 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.study</groupId>
-    <artifactId>web</artifactId>
+    <artifactId>userStore</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+ <!--package example-->
+    <!-- -> org | com.google.-->
+    <!-- -> app | userStore-->
+    <!-- -> logic | main.java.com.study.userStore.service & main.java.com.study.userStore.dao & ui-->
 
     <build>
         <plugins>

@@ -10,7 +10,7 @@
 <body>
 
 <div class="main">
-    <table class="add-user">
+    <table class="add-user" >
         <form action="/main" method="post">
             <tr>
                 <td>
@@ -44,10 +44,6 @@
                     <input type="date" name="dateOfBirth"> <br/>
                 </td>
             </tr>
-
-
-        </form>
-        <form action="/users" method="get">
             <tr>
                 <td>
                     <button class="buttons">
@@ -55,15 +51,18 @@
                     </button>
 
                 </td>
-                <td>
-                    <button class="buttons">
-                        User List
-                    </button>
-                </td>
+        </form>
+        <form action="/users" method="get">
+            <td>
+                <button class="buttons">
+                    User List
+                </button>
+            </td>
             </tr>
         </form>
-
-        ${info}
+        <tr>
+            ${info}
+        </tr>
     </table>
 </div>
 
