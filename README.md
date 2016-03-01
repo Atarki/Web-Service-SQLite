@@ -3,5 +3,5 @@ Web service + servlets + SQLite
 
 
 
-![alt text](screenshot_01.jpg "Screen shot 01")
-![alt text](screenshot_02.jpg "Screen shot 02")
+![alt text](screen_02.jpg "Screen shot 01")
+![alt text](screen_01.jpg "Screen shot 02")
