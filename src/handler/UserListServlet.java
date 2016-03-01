@@ -1,7 +1,6 @@
 package handler;
 
 import dao.User;
-import dao.UserDao;
 import main.PageGenerator;
 import service.UserService;
 
@@ -14,10 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserListServlet extends HttpServlet{
+public class UserListServlet extends HttpServlet {
     private Map<String, Object> pageData = new HashMap<>();
     private UserService userService;
-    private UserDao userDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,13 +31,12 @@ public class UserListServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         userService.save();
         userService.initialize();
+        pageData.put("info", "Data Base was updated successful.");
+
+        resp.getWriter().println(PageGenerator.instance().getPage("users.html", pageData));
     }
 
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
     }
 }

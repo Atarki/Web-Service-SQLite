@@ -2,7 +2,7 @@ package handler;
 
 import dao.UserRepository;
 import main.PageGenerator;
-import dao.UserDao;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,14 +15,15 @@ import java.util.Map;
 
 public class SaveToFileServlet extends HttpServlet {
     private Map<String, Object> pageData = new HashMap<>();
-    private UserRepository userRepository;
-    private UserDao userDao;
+    private UserService userService;
 
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        userDao = UserDao.getUserDao();
-        userDao.saveToFile();
+        userService.saveToFile();
 
         pageData.put("info", "File was saved successful.");
         pageData.put("users", UserRepository.getUserRepository().getAllUsers());

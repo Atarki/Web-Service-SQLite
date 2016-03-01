@@ -29,12 +29,12 @@ public class UserService {
     public void save() {
         userDao.saveToDB();
     }
+    public void saveToFile() {
+        userDao.saveToFile();
+    }
     public void deleteUser(String id) {
-        if (UserRepository.getUserRepository().contains(id)) {
-            userDao.deleteFromNewList(id);
-        } else {
+        if (UserRepository.getUserRepository().deleteUser(id)) {
             userDao.deleteFromDB(id);
-            initialize();
         }
     }
 }

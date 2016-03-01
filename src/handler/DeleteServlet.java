@@ -1,6 +1,5 @@
 package handler;
 
-import dao.UserDao;
 import service.UserService;
 
 import javax.servlet.ServletException;
@@ -15,10 +14,7 @@ public class DeleteServlet extends HttpServlet{
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getHeader("id");
-
-        UserDao userDao = UserDao.getUserDao();
-        userDao.deleteFromNewList(id);
-//        userService.deleteUser(id);
+        userService.deleteUser(id);
 
         System.out.println("User has been deleted with id: " + id);
         resp.addHeader("info", "User has been deleted with id: " + id);

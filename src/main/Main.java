@@ -30,6 +30,7 @@ public class Main {
         userListServlet.setUserService(userService);
         addUserServlet.setUserService(userService);
         deleteServlet.setUserService(userService);
+        saveToFileServlet.setUserService(userService);
 
         userService.setUserDao(userDao);
         userDao.setDataSource(dataSource);
@@ -38,8 +39,8 @@ public class Main {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(addUserServlet), "/main");
         context.addServlet(new ServletHolder(errorServlet), "/error");
-        context.addServlet(new ServletHolder(saveToFileServlet), "/addToRepository");
-        context.addServlet(new ServletHolder(deleteServlet), "/deleteFromDB");
+        context.addServlet(new ServletHolder(saveToFileServlet), "/save");
+        context.addServlet(new ServletHolder(deleteServlet), "/delete");
         context.addServlet(new ServletHolder(userListServlet), "/users");
 
         ResourceHandler resourceHandler = new ResourceHandler();

@@ -40,11 +40,6 @@ public class UserDao {
 
     }
 
-    public void deleteFromNewList(String id) {
-        UserRepository.getUserRepository().deleteUser(id);
-
-    }
-
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

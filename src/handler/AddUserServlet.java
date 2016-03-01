@@ -34,14 +34,13 @@ public class AddUserServlet extends HttpServlet {
             user.setDateOfBirth(req.getParameter("dateOfBirth"));
 
             userService.addToRepository(user);
-//            userDao = UserDao.getUserDao();
 
             resp.sendRedirect("/users");
 
-        } catch (NumberFormatException | NullPointerException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Exception Error: " + e.getMessage());
 
-            req.setAttribute("errorData", "Please fill the form correctly");
+            req.setAttribute("errorData", "Please fill the form correctly. " + e.getMessage());
             RequestDispatcher rd = req.getRequestDispatcher("/error");
             rd.include(req, resp);
         }

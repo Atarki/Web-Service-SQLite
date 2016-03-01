@@ -7,57 +7,67 @@
     <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 <body>
+<div class="main">
+    ${info}
 
-${info}
+    <form action="/main" method="get">
+        <button class="buttons">
+            Add again new user.
+        </button>
+    </form>
 
-<form action="/main" method="get">
-    <button class="buttons">
-        Add again new user.
-    </button>
-</form>
+    <form action="/users" method="post">
+        <form>
+            <button class="buttons">
+                Update Data Base.
+            </button>
+        </form>
+    </form>
 
-<form action="/save" method="post">
-    <button class="buttons">
-        Save to file txt.
-    </button>
-</form>
+    <form action="/save" method="post">
+        <button class="buttons">
+            Save to file txt.
+        </button>
+    </form>
 
 
-<table class="userTable">
-    <thead>
-    <td>index</td>
-    <td>id</td>
-    <td>name</td>
-    <td>age</td>
-    <td>dateOfBirth</td>
-    <td>action</td>
-    </thead>
-    <#list users as user>
-        <tr id=${user_index+1}>
-            <td>#${user_index+1}</td>
-            <td>${user.id}</td>
-            <td>${user.name}</td>
-            <td>${user.age}</td>
-            <td>${user.dateOfBirth}</td>
-            <td>
-                <button class="deleteUser">Delete</button>
-                <script>
-                    $('#${user_index+1}').click(function () {
-                        var trID = $('#${user_index+1}').valueOf();
-                        $.ajax({
-                            type: 'DELETE',
-                            url: '/delete',
-                            headers: {'id': '${user.id}'},
-                            success: function (res, status, xhr) {
-                                $(trID).remove();
-                                alert(xhr.getResponseHeader("info"));
-                            }
+    <table class="userTable">
+        <thead>
+        <td>index</td>
+        <td>id</td>
+        <td>name</td>
+        <td>age</td>
+        <td>dateOfBirth</td>
+        <td>action</td>
+        </thead>
+        <#list users as user>
+            <tr id=${user_index+1}>
+                <td>#${user_index+1}</td>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.age}</td>
+                <td>${user.dateOfBirth}</td>
+                <td>
+                    <button class="deleteUser">Delete</button>
+                    <script>
+                        $('#${user_index+1}').click(function () {
+                            var trID = $('#${user_index+1}').valueOf();
+                            $.ajax({
+                                type: "DELETE",
+                                url: '/delete',
+                                headers: {'id': '${user.id}'},
+                                success: function (res, status, xhr) {
+                                    $(trID).remove();
+                                    alert(xhr.getResponseHeader("info"));
+                                }
+                            });
                         });
-                    });
-                </script>
-            </td>
-        </tr>
-    </#list>
-</table>
+                    </script>
+                </td>
+            </tr>
+        </#list>
+    </table>
+</div>
+
 </body>
 </html>

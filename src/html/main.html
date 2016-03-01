@@ -9,26 +9,63 @@
 </head>
 <body>
 
-<form action="/main" method="post">
-    <input placeholder="ID number" type="text" name="id">
-    <input placeholder="Name" type="text" name="name">
-    <input placeholder="Age" type="number" name="age">
-    <input placeholder="Date Of Birthday" type="date" name="dateOfBirth">
+<div class="main">
+    <table class="add-user" >
+        <form action="/main" method="post">
+            <tr>
+                <td>
+                    ID number
+                </td>
+                <td>
+                    <input type="text" name="id"> <br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Name
+                </td>
+                <td>
+                    <input type="text" name="name" width="60px"> <br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Age
+                </td>
+                <td>
+                    <input type="number" name="age"> <br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Date Of Birthday
+                </td>
+                <td>
+                    <input type="date" name="dateOfBirth"> <br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="buttons">
+                        Add new user.
+                    </button>
 
-
-    <button class="buttons">
-        Add new user.
-    </button>
-
-    <form action="/users"> method="post"
-        <form>
-            <button class="buttons">
-                Update Data Base.
-            </button>
+                </td>
         </form>
-    </form>
+        <form action="/users" method="get">
+            <td>
+                <button class="buttons">
+                    User List
+                </button>
+            </td>
+            </tr>
+        </form>
+        <tr>
+            ${info}
+        </tr>
+    </table>
+</div>
 
-    ${info}
 
 </body>
 </html>
