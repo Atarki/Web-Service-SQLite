@@ -39,7 +39,7 @@ public class UserService {
             }
         }
         userDao.saveToDB(userToSave);
-        initialize();
+//        initialize();
     }
 
     public void saveToFile() {

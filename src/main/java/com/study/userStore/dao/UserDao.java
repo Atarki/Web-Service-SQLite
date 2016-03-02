@@ -52,7 +52,7 @@ public class UserDao {
                     preparedStatement.executeUpdate();
                 }
             }
-            LOG.info("Connection closed.\n Data Base was updated.User was added successfully: " + userList.get(userList.size() - 1));
+            LOG.info("Connection closed.\n Data Base was updated.User was added successfully: ");
         } catch (SQLException e) {
             LOG.warning("Connection closed.\n Warning : " + e);
         }

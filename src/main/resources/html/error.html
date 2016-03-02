@@ -54,7 +54,7 @@
                         $('#${user_index+1}').click(function () {
                             var trID = $('#${user_index+1}').valueOf();
                             var user_id;
-                            if ($({user_id}).length == 0) {
+                            if ($({user_id}).length === 0) {
                                 user_id = '${user.name}'
                             }
                             $.ajax({
