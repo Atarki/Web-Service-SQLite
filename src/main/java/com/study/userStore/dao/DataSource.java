@@ -1,21 +1,23 @@
-package main.java.com.study.userStore.dao;
+package com.study.userStore.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DataSource {
-    private  java.sql.Connection connection;
-    private List<User> userList = new ArrayList<>();
+    private String url = "jdbc:mysql://localhost:3306/userStore" +
+            "?verifyServerCertificate=false" +
+            "&useSSL=true" +
+            "&requireSSL=false";
+    private String driverClass = "com.mysql.jdbc.Driver";
+    private String userName = "root";
+    private String password = "root";
 
     public Connection getConnection() {
         try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:EmployeeDb.db");
-            System.out.println("Connection opened: " + connection);
-            return connection;
+            Class.forName(driverClass);
+            System.out.println("Connection opened: ");
+            return DriverManager.getConnection(url, userName, password);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

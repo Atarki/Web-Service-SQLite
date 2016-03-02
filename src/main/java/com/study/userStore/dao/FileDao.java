@@ -1,4 +1,4 @@
-package main.java.com.study.userStore.dao;
+package com.study.userStore.dao;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +12,6 @@ public class FileDao {
             for (User user : users) {
                 pw.println(user.toString());
             }
-            System.out.println("saved to file");
         } catch (IOException e) {
             e.printStackTrace();
         }

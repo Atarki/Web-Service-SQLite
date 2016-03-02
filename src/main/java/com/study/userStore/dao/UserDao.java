@@ -1,15 +1,19 @@
-package main.java.com.study.userStore.dao;
+package com.study.userStore.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UserDao {
-    private UserDao USERDAO;
-    private java.sql.Connection connection;
-    private UserRepository userRepository;
+    private static final Logger LOG = Logger.getLogger(UserDao.class.getName());
+    private static final String SAVE_USER_QUERY = "INSERT INTO users(name, dateOfBirth) VALUES(?,?)";
+    private static final String GET_ALL_USERS_QUERY = "SELECT * FROM users";
+    private static final String DELETE_USER_QUERY = "delete from users WHERE id =";
+    private static UserDao USERDAO;
     private DataSource dataSource;
 
     public static UserDao getUserDao() {
@@ -19,81 +23,51 @@ public class UserDao {
         return USERDAO;
     }
 
-    public List<User> getAll() {
-        connection = dataSource.getConnection();
-        List<User> list = dataSource.getUserList();
-        userRepository = UserRepository.getUserRepository();
-        userRepository.setList(list);
-        return list;
-    }
-
-    public void saveToDB() {
-        connection = dataSource.getConnection();
-        List<User> newUserList = UserRepository.getUserRepository().getNewUserList();
-        dataSource.addUser(newUserList);
-    }
-
-    public void saveToFile() {
-        connection = dataSource.getConnection();
-        dataSource.saveToFile();
-    }
-
-    public void deleteFromDB(String id) {
-        connection = dataSource.getConnection();
-        dataSource.delete(id);
-
-    }
-
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-
-    public List<User> getUserList() {
-        String query = "SELECT * FROM users";
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query);) {
+    public List<User> getAll() {
+        List<User> list = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_USERS_QUERY);
+             ResultSet resultSet = preparedStatement.executeQuery();) {
             while (resultSet.next()) {
-                userList.add(UserMapper.map(resultSet));
+                list.add(UserMapper.map(resultSet));
             }
-            System.out.println("Connection closed.");
-            return userList;
-
+            LOG.info("Connection closed." + connection);
+            return list;
         } catch (SQLException e) {
-            System.out.println("Connection closed.");
-            e.printStackTrace();
+            LOG.warning("Connection closed.\n Warning : " + e);
         }
         return null;
     }
 
-    public void addUser(List<User> userList) {
-        String query = "INSERT INTO users(id, name, age, dateOfBirth) VALUES(?,?,?,?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+    public void saveToDB(List<User> userList) {
+        try (Connection connection = dataSource.getConnection();) {
             for (User user : userList) {
-                preparedStatement.setInt(1, user.getId());
-                preparedStatement.setString(2, user.getName());
-                preparedStatement.setInt(3, user.getAge());
-                preparedStatement.setString(4, user.getDateOfBirth());
-                preparedStatement.executeUpdate();
+                try (PreparedStatement preparedStatement = connection.prepareStatement(SAVE_USER_QUERY);) {
+                    preparedStatement.setString(1, user.getName());
+                    preparedStatement.setString(2, user.getDateOfBirth().toString());
+                    preparedStatement.executeUpdate();
+                }
             }
-            System.out.println("Data Base was updated.");
-            System.out.println("Connection closed.");
+            LOG.info("Connection closed.\n Data Base was updated.User was added successfully: " + userList.get(userList.size() - 1));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warning("Connection closed.\n Warning : " + e);
         }
     }
 
-    public void delete(String id) {
-        String query = "delete from users WHERE id =" + id;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+    public void deleteFromDB(String id) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER_QUERY + id);) {
             preparedStatement.executeUpdate();
 
-            System.out.println("Connection closed.");
+            LOG.info("Connection closed.");
         } catch (SQLException e) {
-            System.out.println("Connection closed.");
-            e.getSQLState();
+            LOG.warning("Connection closed.\n Warning : " + e);
         }
     }
-
 }
 
 

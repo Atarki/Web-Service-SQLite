@@ -1,4 +1,4 @@
-package main.java.com.study.userStore.main;
+package com.study.userStore.main;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 public class PageGenerator {
-    private static final String HTML_DIR = "src/main.resources.html";
+    private static final String HTML_DIR = "src\\main\\resources\\html";
 
     private static PageGenerator pageGenerator;
     private final Configuration cfg;

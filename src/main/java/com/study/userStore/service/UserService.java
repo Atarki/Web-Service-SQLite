@@ -1,9 +1,11 @@
-package main.java.com.study.userStore.service;
+package com.study.userStore.service;
 
-import main.java.com.study.userStore.dao.User;
-import main.java.com.study.userStore.dao.UserDao;
-import main.java.com.study.userStore.dao.UserRepository;
+import com.study.userStore.dao.FileDao;
+import com.study.userStore.dao.User;
+import com.study.userStore.dao.UserDao;
+import com.study.userStore.dao.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -14,26 +16,40 @@ public class UserService {
     }
 
     public void initialize() {
-        UserRepository userRepository = UserRepository.getUserRepository();
+        UserRepository userRepository = UserRepository.getInstance();
         userRepository.clear();
         userRepository.setList(userDao.getAll());
     }
 
     public List<User> getAll() {
-        return UserRepository.getUserRepository().getAllUsers();
+        return UserRepository.getInstance().getAllUsers();
     }
 
     public void addToRepository(User user) {
-        UserRepository.getUserRepository().addNewUsers(user);
+        UserRepository.getInstance().addNewUsers(user);
     }
+
     public void save() {
-        userDao.saveToDB();
+        List<User> allUsers = UserRepository.getInstance().getAllUsers();
+        List<User> userToSave = new ArrayList<>();
+
+        for (User user : allUsers) {
+            if (user.getId() == null) {
+                userToSave.add(user);
+            }
+        }
+        userDao.saveToDB(userToSave);
+        initialize();
     }
+
     public void saveToFile() {
-        userDao.saveToFile();
+        List<User> userList = userDao.getAll();
+        FileDao fileDao = new FileDao();
+        fileDao.saveToFile(userList);
     }
-    public void deleteUser(String id) {
-        if (UserRepository.getUserRepository().deleteUser(id)) {
+
+    public void deleteUser(String id, String name) {
+        if (UserRepository.getInstance().deleteUser(id, name)) {
             userDao.deleteFromDB(id);
         }
     }

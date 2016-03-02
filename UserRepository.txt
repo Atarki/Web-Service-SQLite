@@ -1,17 +1,8 @@
-User{dateOfBirth=, age=33, name='tes', id=23}
-User{dateOfBirth=, age=34, name='1', id=5}
-User{dateOfBirth=, age=34, name='erwer', id=99}
-User{dateOfBirth=, age=33, name='chika', id=111}
-User{dateOfBirth=, age=22, name='111', id=786}
-User{dateOfBirth=, age=22, name='111', id=786}
-User{dateOfBirth=, age=22, name='111', id=786}
-User{dateOfBirth=, age=22, name='111', id=782}
-User{dateOfBirth=, age=123, name='123', id=333}
-User{dateOfBirth=, age=123, name='123', id=221}
-User{dateOfBirth=, age=22, name='test', id=333}
-User{dateOfBirth=, age=22, name='eee', id=545}
-User{dateOfBirth=, age=123, name='123', id=134}
-User{dateOfBirth=, age=12, name='123', id=124}
-User{dateOfBirth=, age=12, name='12', id=125}
-User{dateOfBirth=, age=22, name='15', id=126}
-User{dateOfBirth=, age=12, name='12', id=123}
+User{dateOfBirth=2016-02-26, name='Tim', id=1}
+User{dateOfBirth=2016-02-26, name='Tolik', id=2}
+User{dateOfBirth=2016-02-26, name='Alex', id=3}
+User{dateOfBirth=1900-01-01, name='chika', id=4}
+User{dateOfBirth=1900-01-01, name='Andryu', id=5}
+User{dateOfBirth=1900-01-01, name='erwer', id=6}
+User{dateOfBirth=1900-01-01, name='Torvalds', id=7}
+User{dateOfBirth=1900-01-01, name='Grovy', id=8}

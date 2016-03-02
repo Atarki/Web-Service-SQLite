@@ -1,22 +1,23 @@
-package main.java.com.study.userStore.dao;
+package com.study.userStore.dao;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class User {
     private String name;
-    private int id;
-    private int age;
-    private String dateOfBirth;
+    private Integer id;
+    private LocalDate dateOfBirth;
+
     public static void main(String[] args) {
         System.out.println(UUID.randomUUID().toString());
     }
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -28,19 +29,11 @@ public class User {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -48,7 +41,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "dateOfBirth=" + dateOfBirth +
-                ", age=" + age +
                 ", name='" + name + '\'' +
                 ", id=" + id +
                 '}';

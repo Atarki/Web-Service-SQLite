@@ -1,19 +1,19 @@
-package main.java.com.study.userStore.main;
+package com.study.userStore.main;
 
-import main.java.com.study.userStore.dao.DataSource;
+import com.study.userStore.dao.DataSource;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import main.java.com.study.userStore.handler.DeleteServlet;
-import main.java.com.study.userStore.handler.ErrorServlet;
-import main.java.com.study.userStore.handler.AddUserServlet;
-import main.java.com.study.userStore.handler.SaveToFileServlet;
-import main.java.com.study.userStore.handler.UserListServlet;
-import main.java.com.study.userStore.dao.UserDao;
-import main.java.com.study.userStore.service.UserService;
+import com.study.userStore.handler.DeleteServlet;
+import com.study.userStore.handler.ErrorServlet;
+import com.study.userStore.handler.AddUserServlet;
+import com.study.userStore.handler.SaveToFileServlet;
+import com.study.userStore.handler.UserListServlet;
+import com.study.userStore.dao.UserDao;
+import com.study.userStore.service.UserService;
 
 public class Main {
     public static void main(String[] args) throws Exception {

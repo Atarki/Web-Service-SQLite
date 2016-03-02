@@ -1,8 +1,8 @@
-package main.java.com.study.userStore.handler;
+package com.study.userStore.handler;
 
-import main.java.com.study.userStore.dao.User;
-import main.java.com.study.userStore.main.PageGenerator;
-import main.java.com.study.userStore.service.UserService;
+import com.study.userStore.dao.User;
+import com.study.userStore.main.PageGenerator;
+import com.study.userStore.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class AddUserServlet extends HttpServlet {
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+    private static final Logger LOG = Logger.getLogger(DeleteServlet.class.getName());
     private Map<String, Object> pageData = new HashMap<>();
     private UserService userService;
 
@@ -21,23 +26,20 @@ public class AddUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         pageData.put("users", "");
         pageData.put("info", "");
-        resp.getWriter().println(PageGenerator.instance().getPage("main.main.resources.html", pageData));
+        resp.getWriter().println(PageGenerator.instance().getPage("main.html", pageData));
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             User user = new User();
-            user.setId(Integer.parseInt(req.getParameter("id")));
-            user.setAge(Integer.parseInt(req.getParameter("age")));
             user.setName(req.getParameter("name"));
-            user.setDateOfBirth(req.getParameter("dateOfBirth"));
-
+            user.setDateOfBirth(LocalDate.parse(req.getParameter("dateOfBirth"),dateTimeFormatter));
             userService.addToRepository(user);
 
             resp.sendRedirect("/users");
         } catch (Exception e) {
-            System.out.println("Exception Error: " + e.getMessage());
+            LOG.warning("Exception Error: " + e.getMessage());
 
             req.setAttribute("errorData", "Please fill the form correctly. " + e.getMessage());
             RequestDispatcher rd = req.getRequestDispatcher("/error");

@@ -43,21 +43,27 @@
         <#list users as user>
             <tr id=${user.id}>
                 <td>#${user_index+1}</td>
-                <td>${user.id}</td>
+                <#if user.id??>${user.id}
+                    <#else> ${user.name}
+                </#if>
                 <td>${user.name}</td>
-                <td>${user.age}</td>
                 <td>${user.dateOfBirth}</td>
                 <td>
                     <button class="deleteUser">Delete</button>
                     <script>
-                        $('#${user.id}').click(function () {
-                            var trID = $('#${user.id}').valueOf();
+                        $('#${user_index+1}').click(function () {
+                            var trID = $('#${user_index+1}').valueOf();
+                            var user_id;
+                            if ($({user_id}).length == 0) {
+                                user_id = '${user.name}'
+                            }
                             $.ajax({
-                                type: 'DELETE',
+                                type: "DELETE",
                                 url: '/delete',
-                                headers: {'id': '${user.id}'},
-                                success: function () {
+                                headers: {'id': user_id, name: '${user.name}'},
+                                success: function (res, status, xhr) {
                                     $(trID).remove();
+                                    alert(xhr.getResponseHeader("info"));
                                 }
                             });
                         });
