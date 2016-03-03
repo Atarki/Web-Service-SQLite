@@ -15,7 +15,6 @@ public class DeleteServlet extends HttpServlet {
     private static final Logger LOG = Logger.getLogger(DeleteServlet.class.getName());
     private UserService userService;
 
-
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getHeader("id");

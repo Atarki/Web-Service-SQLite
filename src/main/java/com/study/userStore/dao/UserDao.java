@@ -13,15 +13,7 @@ public class UserDao {
     private static final String SAVE_USER_QUERY = "INSERT INTO users(name, dateOfBirth) VALUES(?,?)";
     private static final String GET_ALL_USERS_QUERY = "SELECT * FROM users";
     private static final String DELETE_USER_QUERY = "delete from users WHERE id =";
-    private static UserDao USERDAO;
     private DataSource dataSource;
-
-    public static UserDao getUserDao() {
-        if (USERDAO == null) {
-            USERDAO = new UserDao();
-        }
-        return USERDAO;
-    }
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;

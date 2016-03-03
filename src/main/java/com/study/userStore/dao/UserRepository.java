@@ -45,7 +45,7 @@ public class UserRepository {
         } else {
             while (iteratorFromDB.hasNext()) {
                 User user = iteratorFromDB.next();
-                if (user.getId().equals(id)) {
+                if (String.valueOf(user.getId()).equals(id)) {
                     iteratorFromDB.remove();
                     userInDB = true;
                 }

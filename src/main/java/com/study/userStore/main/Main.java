@@ -25,7 +25,7 @@ public class Main {
 
         UserService userService = new UserService();
         DataSource dataSource = new DataSource();
-        UserDao userDao = UserDao.getUserDao();
+        UserDao userDao = new UserDao();
 
         userListServlet.setUserService(userService);
         addUserServlet.setUserService(userService);

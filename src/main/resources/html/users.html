@@ -54,9 +54,9 @@
                     <script>
                         $('#${user_index+1}').click(function () {
                             var trID = $('#${user_index+1}').valueOf();
-                            var user_id;
-                            if ($({user_id}).length === 0) {
-                                user_id = '${user.name}'
+                            var user_id = '${user.id}';
+                            if ($('${user.id}').length !== 0) {
+                                user_id = '${user.name}';
                             }
                             $.ajax({
                                 type: "DELETE",
