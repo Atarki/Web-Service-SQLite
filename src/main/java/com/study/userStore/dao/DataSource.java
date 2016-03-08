@@ -3,23 +3,54 @@ package com.study.userStore.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class DataSource {
-    private String url = "jdbc:mysql://localhost:3306/userStore" +
-            "?verifyServerCertificate=false" +
-            "&useSSL=true" +
-            "&requireSSL=false";
-    private String driverClass = "com.mysql.jdbc.Driver";
-    private String userName = "root";
-    private String password = "root";
+    private static final Logger LOG = Logger.getLogger(DataSource.class.getName());
+    private String url;
+    private String driverClass;
+    private String userName;
+    private String password;
 
     public Connection getConnection() {
         try {
-            Class.forName(driverClass);
-            System.out.println("Connection opened: ");
-            return DriverManager.getConnection(url, userName, password);
+            Class.forName(getDriverClass());
+            LOG.info("Connection opened: ");
+            return DriverManager.getConnection(getUrl(), getUserName(), getPassword());
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getDriverClass() {
+        return driverClass;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setDriverClass(String driverClass) {
+        this.driverClass = driverClass;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

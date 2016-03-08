@@ -2,7 +2,7 @@ package com.study.userStore.handler;
 
 
 import com.study.userStore.dao.UserRepository;
-import com.study.userStore.main.PageGenerator;
+import com.study.userStore.handler.util.PageGenerator;
 import com.study.userStore.service.UserService;
 
 import javax.servlet.ServletException;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -33,9 +32,7 @@ public class SaveToFileServlet extends HttpServlet {
         pageData.put("info", "File was saved successful.");
         pageData.put("users", UserRepository.getInstance().getAllUsers());
 
-        if (LOG.isLoggable(Level.INFO)) {
-            LOG.info("File was saved successful.");
-        }
+        LOG.info("File was saved successful.");
 
         resp.getWriter().println(PageGenerator.instance().getPage("users.html", pageData));
     }

@@ -2,7 +2,7 @@ package com.study.userStore.handler;
 
 
 import com.study.userStore.dao.User;
-import com.study.userStore.main.PageGenerator;
+import com.study.userStore.handler.util.PageGenerator;
 import com.study.userStore.service.UserService;
 
 import javax.servlet.ServletException;
@@ -31,7 +31,6 @@ public class UserListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         userService.save();
-        userService.initialize();
         pageData.put("info", "Data Base was updated successful.");
 
         resp.sendRedirect("/users");

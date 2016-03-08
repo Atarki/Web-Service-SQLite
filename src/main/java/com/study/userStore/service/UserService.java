@@ -1,6 +1,6 @@
 package com.study.userStore.service;
 
-import com.study.userStore.dao.FileDao;
+import com.study.userStore.dao.FileExporter;
 import com.study.userStore.dao.User;
 import com.study.userStore.dao.UserDao;
 import com.study.userStore.dao.UserRepository;
@@ -39,17 +39,19 @@ public class UserService {
             }
         }
         userDao.saveToDB(userToSave);
-//        initialize();
+        initialize();
     }
 
     public void saveToFile() {
         List<User> userList = userDao.getAll();
-        FileDao fileDao = new FileDao();
-        fileDao.saveToFile(userList);
+        FileExporter fileExporter = new FileExporter();
+        fileExporter.setFileName("UserRepossitories.txt");
+        fileExporter.saveToFile(userList);
     }
 
     public void deleteUser(String id, String name) {
-        if (UserRepository.getInstance().deleteUser(id, name)) {
+        boolean isNotInDB = UserRepository.getInstance().deleteUser(id, name);
+        if (isNotInDB) {
             userDao.deleteFromDB(id);
         }
     }

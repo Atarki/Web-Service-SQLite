@@ -1,4 +1,4 @@
-package com.study.userStore.main;
+package com.study.userStore.starter;
 
 import com.study.userStore.dao.DataSource;
 import org.eclipse.jetty.server.Handler;
@@ -15,7 +15,7 @@ import com.study.userStore.handler.UserListServlet;
 import com.study.userStore.dao.UserDao;
 import com.study.userStore.service.UserService;
 
-public class Main {
+public class Starter {
     public static void main(String[] args) throws Exception {
         AddUserServlet addUserServlet = new AddUserServlet();
         ErrorServlet errorServlet = new ErrorServlet();
@@ -27,6 +27,11 @@ public class Main {
         DataSource dataSource = new DataSource();
         UserDao userDao = new UserDao();
 
+        dataSource.setDriverClass("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/userStore");
+        dataSource.setUserName("root");
+        dataSource.setPassword("root");
+
         userListServlet.setUserService(userService);
         addUserServlet.setUserService(userService);
         deleteServlet.setUserService(userService);
@@ -37,14 +42,14 @@ public class Main {
         userService.initialize();
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(addUserServlet), "/main");
+        context.addServlet(new ServletHolder(addUserServlet), "/starter");
         context.addServlet(new ServletHolder(errorServlet), "/error");
         context.addServlet(new ServletHolder(saveToFileServlet), "/save");
         context.addServlet(new ServletHolder(deleteServlet), "/delete");
         context.addServlet(new ServletHolder(userListServlet), "/users");
 
         ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setResourceBase("src/main/resources");
+        resourceHandler.setResourceBase("src/starter/resources");
 
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});

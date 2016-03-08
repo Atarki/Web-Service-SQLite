@@ -1,7 +1,7 @@
 package com.study.userStore.handler;
 
 
-import com.study.userStore.main.PageGenerator;
+import com.study.userStore.handler.util.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +19,7 @@ public class ErrorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/main.html;charset=utf-8");
+        resp.setContentType("text/starter.html;charset=utf-8");
         String errorData = (String) req.getAttribute("errorData");
 
         Map<String, Object> dataErrorMap = new HashMap<>();
@@ -27,6 +27,6 @@ public class ErrorServlet extends HttpServlet {
         dataErrorMap.put("info", errorData);
         dataErrorMap.put("users", "");
 
-        resp.getWriter().println(PageGenerator.instance().getPage("main.html", dataErrorMap));
+        resp.getWriter().println(PageGenerator.instance().getPage("starter.html", dataErrorMap));
     }
 }

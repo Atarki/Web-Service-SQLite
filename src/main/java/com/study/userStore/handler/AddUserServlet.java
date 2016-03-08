@@ -1,7 +1,7 @@
 package com.study.userStore.handler;
 
 import com.study.userStore.dao.User;
-import com.study.userStore.main.PageGenerator;
+import com.study.userStore.handler.util.PageGenerator;
 import com.study.userStore.service.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -26,7 +26,7 @@ public class AddUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         pageData.put("users", "");
         pageData.put("info", "");
-        resp.getWriter().println(PageGenerator.instance().getPage("main.html", pageData));
+        resp.getWriter().println(PageGenerator.instance().getPage("starter.html", pageData));
     }
 
     @Override

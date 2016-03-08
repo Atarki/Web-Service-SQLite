@@ -32,7 +32,7 @@ public class UserDao {
         } catch (SQLException e) {
             LOG.warning("Connection closed.\n Warning : " + e);
         }
-        return null;
+        return list;
     }
 
     public void saveToDB(List<User> userList) {

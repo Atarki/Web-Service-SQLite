@@ -10,7 +10,7 @@
     <!--package example-->
     <!-- -> org | com.google.-->
     <!-- -> app | userStore-->
-    <!-- -> logic | main.java.com.study.userStore.service & main.java.com.study.userStore.dao & ui-->
+    <!-- -> logic | starter.java.com.study.userStore.service & starter.java.com.study.userStore.dao & ui-->
 
     <build>
         <plugins>
@@ -67,6 +67,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.38</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

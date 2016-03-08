@@ -6,18 +6,18 @@ import java.util.List;
 
 public class UserRepository {
     private static UserRepository USER_REPOSITORY;
-    private static List<User> userList;
+    private List<User> userList;
 
     public static UserRepository getInstance() {
         if (USER_REPOSITORY == null) {
             USER_REPOSITORY = new UserRepository();
-            userList = new ArrayList<>();
+            USER_REPOSITORY.setList(new ArrayList<>());
         }
         return USER_REPOSITORY;
     }
 
     public void setList(List<User> list) {
-        UserRepository.userList = list;
+        userList = list;
     }
 
     public void addNewUsers(User user) {
